@@ -1,0 +1,7 @@
+Difficulties faced while implementation:
+
+1. Binding the changed image at runtime was a huge problem until we encountered the interface INotifyPropertyChanged which can be implemented by our main window. This notifies that certain properties and values have changed for variables, controls and methods and gives a corresponding callback. This was required for performing swipe gestures for changing images.
+
+2. Images were loaded a split second slowly when performing gestures. Hence, we loaded the previous and next image along with the current to reduce the loading time when changing pictures.
+
+3. Handling animations of the mouse cursor as well as WPF animations was difficult but achievable.

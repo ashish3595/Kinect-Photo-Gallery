@@ -1,0 +1,309 @@
+﻿<Window x:Name="window" x:Class="KinectProjectWork.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:k="http://schemas.microsoft.com/kinect/2014"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KinectProjectWork"
+        mc:Ignorable="d"
+        Loaded="MainWindow_Loaded"
+        Title="Kinect Photo Gallery" Height="800" Width="1366" WindowState="Maximized">
+
+    <Window.Resources>
+        <StackPanel x:Key="StackPanel_ChangeBackground">
+            <TextBlock Text="Change Background" FontSize="22" FontFamily="Segoe Print" FontWeight="Bold" />
+        </StackPanel>
+
+        <StackPanel x:Key="StackPanel_AllImages">
+            <TextBlock Text="All Images" FontSize="17" FontFamily="Segoe Print" FontWeight="Bold" />
+        </StackPanel>
+        
+        
+    </Window.Resources>
+
+    <k:KinectRegion x:Name="kinectRegion">
+    <Grid DataContext="{Binding ElementName=window}" Name="Grid1" ClipToBounds="True">
+        <Grid.Background>
+            <ImageBrush x:Name="backPic" ImageSource="{Binding backgroundPic}" />
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="181*"/>
+            <ColumnDefinition Width="181*"/>
+            <ColumnDefinition Width="181*"/>
+            <ColumnDefinition Width="181*"/>
+            <ColumnDefinition Width="181*"/>
+            <ColumnDefinition Width="200*"/>
+        </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="24*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="269*"/>
+                <RowDefinition Height="270*"/>
+                <RowDefinition Height="122*"/>
+                <RowDefinition Height="50*"/>
+            </Grid.RowDefinitions>
+
+
+            <k:KinectUserViewer Grid.Column="0" Grid.Row="5" Height="115" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+            <ProgressBar x:Name="dogsBar" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center" Height="90" Width="120" VerticalAlignment="Center" Opacity="1" Visibility="Collapsed" Foreground="#FF5050F1" BorderBrush="White" RenderTransformOrigin="0.5,0.5" >
+            <ProgressBar.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </ProgressBar.Background>
+            <ProgressBar.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ProgressBar.RenderTransform>
+        </ProgressBar>
+
+        <!--
+                 MouseEnter="onMouseEnter" MouseLeave="onMouseLeave"
+            -->
+            <Border Name="Dogs" MouseEnter="onMouseEnter" MouseLeave="onMouseLeave"  Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Height="120" Width="90" >
+            <Border.Style>
+                <Style>
+                    <Setter Property="Border.Background" Value="White"/>
+                    <Style.Triggers>
+                        <Trigger Property="Border.IsMouseOver" Value="True">
+                            <Setter Property="Border.Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Border.Effect>
+                <DropShadowEffect Color="White" Opacity="1" ShadowDepth="-1" BlurRadius="40"/>
+            </Border.Effect>
+                <Button Name="dogsLabel" Height="120" Width="90" Click="displayImages">
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <Image Source="Images/dogs.jpg" Height="80"/>
+                        <TextBlock Name="dogsLabelText" Text="Dogs" HorizontalAlignment="Center" FontFamily="Segoe Print" FontWeight="Bold" FontSize="16"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+        <ProgressBar x:Name="carsBar" Grid.Column="6" Grid.Row="3" HorizontalAlignment="Center" Height="90" Width="120" VerticalAlignment="Center" Opacity="1" Visibility="Collapsed" Foreground="#FF5050F1" BorderBrush="White" RenderTransformOrigin="0.5,0.5" >
+            <ProgressBar.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </ProgressBar.Background>
+            <ProgressBar.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ProgressBar.RenderTransform>
+        </ProgressBar>
+        <!--
+                 MouseEnter="onMouseEnter" MouseLeave="onMouseLeave"
+            -->
+            <Border Name="Cars" MouseEnter="onMouseEnter" MouseLeave="onMouseLeave" Grid.Column="6" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="120" Width="90" >
+            <Border.Style>
+                <Style>
+                    <Setter Property="Border.Background" Value="White"/>
+                    <Style.Triggers>
+                        <Trigger Property="Border.IsMouseOver" Value="True">
+                            <Setter Property="Border.Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Border.Effect>
+                <DropShadowEffect Color="White" Opacity="1" ShadowDepth="-1" BlurRadius="40"/>
+            </Border.Effect>
+                <Button Name="carsLabel" Height="120" Width="90" Click="displayImages">
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <Image Source="Images/cars.jpg" Height="80"/>
+                        <TextBlock Name="carsLabelText" Text="Cars" HorizontalAlignment="Center" FontFamily="Segoe Print" FontWeight="Bold" FontSize="16"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+        <ProgressBar x:Name="footballBar" Grid.Column="6" Grid.Row="4" HorizontalAlignment="Center" Height="90" Width="120" VerticalAlignment="Center" Opacity="1" Visibility="Collapsed" Foreground="#FF5050F1" BorderBrush="White" RenderTransformOrigin="0.5,0.5">
+            <ProgressBar.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </ProgressBar.Background>
+            <ProgressBar.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ProgressBar.RenderTransform>
+        </ProgressBar>
+
+        <!--
+                 MouseEnter="onMouseEnter" MouseLeave="onMouseLeave"
+            -->
+            <Border Name="Football"  MouseEnter="onMouseEnter" MouseLeave="onMouseLeave"   Grid.Column="6" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Height="120" Width="90">
+            <Border.Style>
+                <Style>
+                    <Setter Property="Border.Background" Value="White"/>
+                    <Style.Triggers>
+                        <Trigger Property="Border.IsMouseOver" Value="True">
+                            <Setter Property="Border.Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Border.Effect>
+                <DropShadowEffect Color="White" Opacity="1" ShadowDepth="-1" BlurRadius="40"/>
+            </Border.Effect>
+                <Button Name="footballLabel" Height="120" Width="90" Click="displayImages">
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <Image Source="Images/football.jpg" Height="80"/>
+                        <TextBlock Name="footballLabelText" Text="Football" HorizontalAlignment="Center" FontFamily="Segoe Print" FontWeight="Bold" FontSize="16"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+        <ProgressBar x:Name="dcBar" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" Height="90" Width="120" VerticalAlignment="Center" Opacity="1" Visibility="Collapsed" Foreground="#FF5050F1" BorderBrush="White" RenderTransformOrigin="0.5,0.5" >
+            <ProgressBar.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </ProgressBar.Background>
+            <ProgressBar.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ProgressBar.RenderTransform>
+        </ProgressBar>
+
+        <!--
+                 MouseEnter="onMouseEnter" MouseLeave="onMouseLeave"
+            -->
+            <Border Name="DC" MouseEnter="onMouseEnter" MouseLeave="onMouseLeave"  Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="120" Width="90" >
+            <Border.Style>
+                <Style>
+                    <Setter Property="Border.Background" Value="White"/>
+                    <Style.Triggers>
+                        <Trigger Property="Border.IsMouseOver" Value="True">
+                            <Setter Property="Border.Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Border.Effect>
+                <DropShadowEffect Color="White" Opacity="1" ShadowDepth="-1" BlurRadius="40"/>
+            </Border.Effect>
+                <Button Name="dcLabel" Height="120" Width="90" Click="displayImages">
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <Image Source="Images/dc.jpg" Height="80"/>
+                        <TextBlock Name="dcLabelText" Text="DC" HorizontalAlignment="Center" FontFamily="Segoe Print" FontWeight="Bold" FontSize="16"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+        <ProgressBar x:Name="quitBar" Grid.Column="6" Grid.Row="5" HorizontalAlignment="Right" Height="90" VerticalAlignment="Bottom" Width="90" Opacity="1" Visibility="Collapsed" Foreground="#FF5050F1" BorderBrush="White" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
+            <ProgressBar.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ProgressBar.RenderTransform>
+            <ProgressBar.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </ProgressBar.Background>
+        </ProgressBar>
+
+        <!--
+                 MouseEnter="onMouseEnterQ" MouseLeave="onMouseLeaveQ"
+            -->
+            <Border Name="Quit" MouseEnter="onMouseEnterQ" MouseLeave="onMouseLeaveQ"  BorderBrush="Transparent" Grid.Column="6" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.RowSpan="2">
+            <Border.Effect>
+                <DropShadowEffect Color="White" Opacity="1" ShadowDepth="-100" BlurRadius="60"/>
+            </Border.Effect>
+                <Button Width="90" Height="90" Click="quitApplication">
+                    <Image Source="Images/close-button.png" RenderOptions.BitmapScalingMode="HighQuality" Opacity="1"/>
+                </Button>
+            </Border>
+            <ProgressBar Name="allBar" HorizontalAlignment="Center" Height="32" Width="100" VerticalAlignment="Center" Opacity="1" Visibility="Collapsed" Foreground="Blue" BorderBrush="White" RenderTransformOrigin="0.5,0.5" Grid.Column="3" Grid.Row="2" Background="White" />
+        
+            <!--
+                 MouseEnter="onMouseEnter" MouseLeave="onMouseLeave"
+            -->
+            <Border Name="AllImages" MouseEnter="onMouseEnter" MouseLeave="onMouseLeave"  Height="32" Width="100" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Border.Style>
+                <Style>
+                    <Setter Property="Border.Background" Value="White"/>
+                    <Style.Triggers>
+                        <Trigger Property="Border.IsMouseOver" Value="True">
+                            <Setter Property="Border.Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Border.Effect>
+                <DropShadowEffect Color="White" Opacity="1" ShadowDepth="-1" BlurRadius="40"/>
+            </Border.Effect>
+                <Button Name="allLabel" Width="120" Content="{StaticResource StackPanel_AllImages}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="displayImages"  />
+        </Border>
+        <ProgressBar Name="backBar" HorizontalAlignment="Center" Height="32" Width="170" VerticalAlignment="Center" Opacity="1" Visibility="Collapsed" Foreground="Blue" BorderBrush="White" RenderTransformOrigin="0.5,0.5" Grid.Column="0" Grid.Row="2" Background="White" />
+
+        <!--
+                 MouseEnter="onMouseEnter" MouseLeave="onMouseLeave"
+            -->
+        <Border Name="back" MouseEnter="onMouseEnter" MouseLeave="onMouseLeave"  Height="32" Width="250" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" >
+            <Border.Style>
+                <Style>
+                    <Setter Property="Border.Background" Value="White"/>
+                    <Style.Triggers>
+                        <Trigger Property="Border.IsMouseOver" Value="True">
+                            <Setter Property="Border.Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Border.Effect>
+                <DropShadowEffect Color="White" Opacity="1" ShadowDepth="-1" BlurRadius="40"/>
+            </Border.Effect>
+                <Button Name="backLabel" Width="250" Content="{StaticResource StackPanel_ChangeBackground}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="changeBackground" />
+        </Border>
+        <Canvas x:Name="StickMen" HorizontalAlignment="Right" VerticalAlignment="Stretch" Height="150" Width="150" Grid.Row="5" Grid.Column="0" Grid.RowSpan="2"/>
+
+
+            <ScrollViewer Name="scrollViewer1" Grid.Row="3" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="5"
+                                  HorizontalScrollBarVisibility="Hidden"
+                                  VerticalScrollBarVisibility="Hidden" 
+                          k:KinectRegion.IsHorizontalRailEnabled="true" k:KinectRegion.IsVerticalRailEnabled="true"
+                    k:KinectRegion.ZoomMode="Enabled" >
+                <Image x:Name="next" Source="{Binding NextPicture}"  Stretch="None" ClipToBounds="True" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="5"  />
+            </ScrollViewer>
+
+            <ScrollViewer Name="scrollViewer2" Grid.Row="3" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="5"
+                                  HorizontalScrollBarVisibility="Hidden"
+                                  VerticalScrollBarVisibility="Hidden" 
+                          k:KinectRegion.IsHorizontalRailEnabled="true" k:KinectRegion.IsVerticalRailEnabled="true"
+                          k:KinectRegion.ZoomMode="Enabled" >
+                <Image x:Name="previous" Source="{Binding PreviousPicture}" Stretch="None" ClipToBounds="True" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="5" />
+            </ScrollViewer>
+            <ScrollViewer Name="scrollViewer3" Grid.Row="3" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="5"
+                                  HorizontalScrollBarVisibility="Hidden"
+                                  VerticalScrollBarVisibility="Hidden" 
+                          k:KinectRegion.IsHorizontalRailEnabled="true" k:KinectRegion.IsVerticalRailEnabled="true"
+                        k:KinectRegion.ZoomMode="Enabled" >
+                <Image x:Name="current" Source="{Binding Picture}" Stretch="None" ClipToBounds="True" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="5"  />
+            </ScrollViewer>
+        
+            <TextBlock Name="Text1" Text="Kinect Photo Gallery" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="2" FontFamily="Segoe UI Semibold" FontWeight="Bold" TextDecorations="Underline"/>
+        <TextBlock Name="Text7" Text="Application will close in " Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="26" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="6" FontFamily="SimSun-ExtB" FontWeight="Bold" Opacity="0"/>
+        <TextBlock Name="Text8" Text="" Foreground="Blue" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="26"  Grid.Column="4" Grid.Row="6" FontFamily="SimSun-ExtB" FontWeight="Bold" Opacity="0"/>
+    </Grid>
+    </k:KinectRegion>
+</Window>
